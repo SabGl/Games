@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman Game</title>
+</head>
+<body>
+<script>
+    confirm('Вы готовы сыграть в угадайку? Вам будет дано слово и Ваша задача правильно подобрать буковки! Начинаем?')
+    //создаем массив слов для выбора
+    const words = [
+        "машина",
+        "ромашка",
+        "непокорность",
+        "кофе",
+        "слон",
+        "море",
+        "каникулы",
+    ];
+    //выбираем случайное слово
+    let randomWord = words[Math.floor(Math.random() * words.length)];
+    //создаем итоговый массив
+    let answerArray = [];
+    for (let i = 0; i < randomWord.length; i++) {
+        answerArray[i] = " _ ";
+    }
+    let remainingLetters = randomWord.length;
+
+    //игровой цикл
+    while (remainingLetters > 0) {
+        //показываем состояние игры
+        alert(answerArray.join(" "));
+        console.log(answerArray)
+        //запрашиваем вариант ответа
+        let guess = prompt("Угадываем букву, дамы и господа! Если не хочется жмем 'Отмена'")
+        if (guess === null) {
+            //выход из игры
+            break;
+        } else if (guess.length !== 1) {
+            alert("Пожалуйста, введите одиночною букву... А то тоска смертная...")
+        } else {
+            //обновляем состояние игры
+            for (let j = 0; j < randomWord.length; j++) {
+                if (randomWord[j] === guess) {
+                    answerArray[j] = guess;
+                    remainingLetters--;
+                }
+            }
+        }
+        //конец игры
+    }
+    //отображаем ответ
+    alert(answerArray.join(" "))
+    alert(`Оооооогонь! Это просто невероятно! Загаданное слово было - ${randomWord} !!! И оно угадано!!! БРАВО!`);
+</script>
+</body>
+</html>
